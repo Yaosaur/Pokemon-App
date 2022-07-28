@@ -14,8 +14,12 @@ class MyFirstComponent extends React.Component {
           <h1>See All The Pokemon!</h1>
         </div>
         <ul>
-          {pokemon.map((mon) => (
-            <li>{mon.name[0].toUpperCase() + mon.name.slice(1)}</li>
+          {pokemon.map((mon, i) => (
+            <li>
+              <a href={`/pokemon/${i}`}>
+                {mon.name[0].toUpperCase() + mon.name.slice(1)}
+              </a>
+            </li>
           ))}
         </ul>
       </div>
