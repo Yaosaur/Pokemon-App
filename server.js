@@ -1,21 +1,49 @@
 const express = require("express");
 const app = express();
-const port = 3000;
-const pokemon = require("./models/pokemon");
+const mongoose = require("mongoose");
+const Pokemon = require("./models/pokemon");
+require("dotenv").config();
+const port = process.env.PORT || 3003;
+
+mongoose.connect(process.env.MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+});
+mongoose.connection.once("open", () => {
+  console.log("connected to mongo");
+});
 
 app.set("view engine", "jsx");
 app.engine("jsx", require("express-react-views").createEngine());
+
+app.use(express.urlencoded({ extended: false }));
 
 app.get("/", (req, res) => {
   res.send("Welcome to the Pokemon App!");
 });
 
 app.get("/pokemon", (req, res) => {
-  res.render("Index", { pokemon });
+  Pokemon.find({}, (error, allPokemon) => {
+    res.render("Index", { pokemon: allPokemon });
+  });
+});
+
+app.get("/pokemon/new", (req, res) => {
+  res.render("New");
+});
+
+app.post("/pokemon", (req, res) => {
+  Pokemon.create(req.body, () => {
+    res.redirect("/pokemon");
+  });
 });
 
 app.get("/pokemon/:id", (req, res) => {
-  res.render("Show", { pokemon: pokemon[req.params.id] });
+  Pokemon.findById(req.params.id, (err, foundPokemon) => {
+    res.render("Show", {
+      pokemon: foundPokemon,
+    });
+  });
 });
 
 app.listen(port, () => {
