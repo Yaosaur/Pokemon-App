@@ -13,6 +13,9 @@ class MyFirstComponent extends React.Component {
         <div style={myStyle}>
           <h1>See All The Pokemon!</h1>
         </div>
+        <h3>
+          <a href="/pokemon/new">Add New Pokemon</a>
+        </h3>
         <ul>
           {pokemon.map((mon) => (
             <li>

@@ -22,7 +22,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(methodOverride("_method"));
 
 app.get("/", (req, res) => {
-  res.send("Welcome to the Pokemon App!");
+  res.send(
+    `<div>Welcome to the Pokemon App!</div><a href="/pokemon">Click here to go to Pokedex!</a>`
+  );
 });
 
 app.get("/pokemon/seed", async (req, res) => {
