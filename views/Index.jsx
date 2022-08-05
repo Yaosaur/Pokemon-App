@@ -22,11 +22,6 @@ class MyFirstComponent extends React.Component {
               <a href={`/pokemon/${mon._id}`}>
                 {mon.name[0].toUpperCase() + mon.name.slice(1)}
               </a>
-              <br />
-              <form action={`/pokemon/${mon._id}?_method=DELETE`} method="POST">
-                <button type="submit">Delete</button>
-              </form>
-              <a href={`/pokemon/${mon._id}/edit`}>Edit Pokemon</a>
             </li>
           ))}
         </ul>

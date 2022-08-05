@@ -17,6 +17,13 @@ class MyFirstComponent extends React.Component {
         <img src={pokemon.img} />
         <nav>
           <a href="/pokemon">Back</a>
+          <br />
+          <form action={`/pokemon/${pokemon._id}?_method=DELETE`} method="POST">
+            <button type="submit">Delete</button>
+          </form>
+          <form action={`/pokemon/${pokemon._id}/edit`} method="GET">
+            <button type="submit">Edit Pokemon</button>
+          </form>
         </nav>
       </div>
     );
